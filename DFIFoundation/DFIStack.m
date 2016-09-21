@@ -59,13 +59,10 @@ static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 - (void)pop {
     pthread_mutex_lock(&lock);
     
-    if (self.isEmpty) {
-        pthread_mutex_unlock(&lock);
-        return;
+    if (!self.isEmpty) {
+        [self.stack removeLastObject];
     }
-    
-    [self.stack removeLastObject];
-    
+
     pthread_mutex_unlock(&lock);
 }
 

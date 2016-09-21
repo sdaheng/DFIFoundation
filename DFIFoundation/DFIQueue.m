@@ -56,13 +56,10 @@ static pthread_mutex_t mutext_t = PTHREAD_MUTEX_INITIALIZER;
 - (void)dequeue {
     pthread_mutex_lock(&mutext_t);
     
-    if (self.isEmpty) {
-        pthread_mutex_unlock(&mutext_t);
-        return;
+    if (!self.isEmpty) {
+        [self.queue removeObjectAtIndex:0];
     }
     
-    [self.queue removeObjectAtIndex:0];
-
     pthread_mutex_unlock(&mutext_t);
 }
 
